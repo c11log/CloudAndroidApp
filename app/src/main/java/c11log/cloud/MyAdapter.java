@@ -1,22 +1,24 @@
 package c11log.cloud;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 
-public class MyAdapter extends SelectableAdapter<MyAdapter.ViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
-    private static final int ITEM_COUNT = 50;
+    private static final int ITEM_COUNT = 2;
     private List<Item> items;
 
     private ViewHolder.ClickListener clickListener;
@@ -26,14 +28,19 @@ public class MyAdapter extends SelectableAdapter<MyAdapter.ViewHolder> {
 
         this.clickListener = clickListener;
 
-        // Create some items
-        Random random = new Random();
+        // Create some item
         items = new ArrayList<>();
         for (int i = 0; i < ITEM_COUNT; ++i) {
-            items.add(new Item("Item " + i, "This is the item number " + i));
+            items.add(new Item("Username " + i, "2012-05-25", BitmapFactory.decodeResource(null, R.drawable.bg)));
+
         }
     }
-
+    public void addItem(Bitmap image){
+        items.add(new Item("Linus", "2012-05-25", image));
+    }
+    public Item getItem(int position){
+       return items.get(position);
+    }
     public void removeItem(int position) {
         items.remove(position);
         notifyItemRemoved(position);
@@ -76,7 +83,7 @@ public class MyAdapter extends SelectableAdapter<MyAdapter.ViewHolder> {
         for (int i = 0; i < itemCount; ++i) {
             items.remove(positionStart);
         }
-        notifyItemRangeRemoved(positionStart, itemCount);
+       // notifyItemRangeRemoved(positionStart, itemCount);
     }
 
     @Override
@@ -90,8 +97,9 @@ public class MyAdapter extends SelectableAdapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Item item = items.get(position);
 
-        holder.title.setText(item.getTitle());
-        holder.subtitle.setText(item.getSubtitle());
+        holder.name.setText(item.getName());
+        holder.date.setText(item.getDate());
+        holder.image.setImageBitmap(item.getImageUrl());
 //        // Span the item if active
 //        final ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
 //        if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
@@ -101,7 +109,7 @@ public class MyAdapter extends SelectableAdapter<MyAdapter.ViewHolder> {
 //        }
 
         // Highlight the item if it's selected
-        holder.selectedOverlay.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
+       // holder.selectedOverlay.setVisibility(isSelected(position) ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -115,8 +123,9 @@ public class MyAdapter extends SelectableAdapter<MyAdapter.ViewHolder> {
         @SuppressWarnings("unused")
         private static final String TAG = ViewHolder.class.getSimpleName();
 
-        TextView title;
-        TextView subtitle;
+        TextView name;
+        TextView date;
+        ImageView image;
         View selectedOverlay;
 
         private ClickListener listener;
@@ -124,8 +133,9 @@ public class MyAdapter extends SelectableAdapter<MyAdapter.ViewHolder> {
         public ViewHolder(View itemView, ClickListener listener) {
             super(itemView);
 
-            title = (TextView) itemView.findViewById(R.id.title);
-            subtitle = (TextView) itemView.findViewById(R.id.subtitle);
+            name = (TextView) itemView.findViewById(R.id.name);
+            date = (TextView) itemView.findViewById(R.id.date);
+            image = (ImageView) itemView.findViewById(R.id.list_image);
             selectedOverlay = itemView.findViewById(R.id.selected_overlay);
 
             this.listener = listener;

@@ -3,6 +3,8 @@
     package="c11log.cloud" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -21,14 +23,12 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme"
- >
+        android:label="CloudChat"
+        android:theme="@style/AppTheme" >
         <activity
-            android:theme="@style/AppTheme2"
             android:name=".MainActivity"
-            android:label="@string/app_name" >
-
+            android:label="CloudChat"
+            android:theme="@style/AppTheme2" >
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -44,6 +44,20 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".viewImage"
+            android:label="@string/title_activity_view_image"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme2" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="c11log.cloud.MainActivity" />
+        </activity>
+        <activity
+            android:name=".chat"
+            android:label="@string/title_activity_chat" >
+        </activity>
     </application>
 
 </manifest>

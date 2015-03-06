@@ -222,9 +222,8 @@ public class LoginActivity extends Activity{
 
             if (success) {
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
-
                 startActivity(i);
-                finish();
+                //finish();
 
             } else {
   passwordView.setError(getString(R.string.error_incorrect_password));
