@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/background"
+    tools:context=".SignUpActivity" >
+    <!-- Login progress -->
+
+    <LinearLayout
+        android:id="@+id/login_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="CloudChat"
+            android:textColor="#ffffff"
+
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="6"
+            android:hint="@string/prompt_username"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:inputType="textNoSuggestions" >
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/prompt_password"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/prompt_email"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:inputType="textEmailAddress" />
+        <Button
+            android:id="@+id/signup"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background ="#50ffffff"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:bottomRightRadius="20dp"
+            android:bottomLeftRadius="20dp"
+            android:topLeftRadius="10dp"
+            android:topRightRadius="10dp"
+            android:textColor="#fff"
+            android:onClick="signUpComleteListner"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/signupbutton" />
+
+    </LinearLayout>
+
+</RelativeLayout>

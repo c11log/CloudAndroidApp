@@ -23,10 +23,7 @@
         android:layout_height="wrap_content"
 
 
-        fab:fab_plusIconColor="@color/half_black"
-        fab:fab_colorNormal="@color/white"
-        fab:fab_colorPressed="@color/white_pressed"
-        android:layout_marginRight="20dp"
+      android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />

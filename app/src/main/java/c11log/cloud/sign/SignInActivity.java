@@ -1,11 +1,13 @@
-package c11log.cloud;
+package c11log.cloud.sign;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import android.os.Build;
@@ -16,81 +18,42 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import c11log.cloud.app.MainActivity;
+import c11log.cloud.R;
+
 
 /**
  * A login screen that offers login via email/password and via Google+ sign in.
  * <p/>
  */
-public class LoginActivity extends Activity{
+public class SignInActivity extends Activity{
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "hello", "world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
     private UserLoginTask mAuthTask = null;
 
     // UI references.
     private EditText passwordView;
     private EditText usernameView;
-    private Button loginButton;
     private View loginStatusView;
     private View loginFormView;
-   /* private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mEmailLoginFormView;
-    private SignInButton mPlusSignInButton;
-    private View mSignOutButtons;
-    private View mLoginFormView;
-*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        // Find the Google+ sign in button.
-  //      mPlusSignInButton = (SignInButton) findViewById(R.id.plus_sign_in_button);
+        setContentView(R.layout.activity_signin);
 
         // Set up the login form.
-        loginFormView = (View) findViewById(R.id.login_form);
-        loginStatusView = (View) findViewById(R.id.login_status);
-    passwordView = (EditText) findViewById(R.id.password);
-    usernameView = (EditText) findViewById(R.id.username);
-    loginButton = (Button) findViewById(R.id.login);
-     //   mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-       /*     @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
+        loginFormView = findViewById(R.id.login_form);
+        loginStatusView = findViewById(R.id.login_status);
+        passwordView = (EditText) findViewById(R.id.password);
+        usernameView = (EditText) findViewById(R.id.username);
+        Button loginButton = (Button) findViewById(R.id.login);
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);*/
         loginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
-/*
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-        mEmailLoginFormView = findViewById(R.id.email_login_form);
-        mSignOutButtons = findViewById(R.id.plus_sign_out_buttons);
-    */
-    }
-
-    private void populateAutoComplete() {
-       // getLoaderManager().initLoader(0, null, this);
     }
 
 
@@ -99,7 +62,7 @@ public class LoginActivity extends Activity{
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    public void attemptLogin() {
+    void attemptLogin() {
 
 
         // Reset errors.
@@ -111,7 +74,6 @@ public class LoginActivity extends Activity{
 
         boolean cancel = false;
         View focusView = null;
-
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
@@ -133,17 +95,15 @@ public class LoginActivity extends Activity{
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            System.out.println("hej");
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+
         }
-        System.out.println("då!");
     }
 
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
     /**
@@ -184,6 +144,16 @@ public class LoginActivity extends Activity{
         }
     }
 
+    public void signUpListener() {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivityForResult(intent, 0);
+    }
+
+    public void restorePasswordListener() {
+        Intent intent = new Intent(this, RestoreActivity.class);
+        startActivityForResult(intent, 0);
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -200,19 +170,28 @@ public class LoginActivity extends Activity{
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
             try {
-                // Simulate network access.
+                //simulate network access
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
             }
+            getApplicationContext();
+            SharedPreferences sharedPref=getSharedPreferences("c11log.cloud", MODE_PRIVATE);
 
 
+            String defaultValue = sharedPref.getString(username, "");
+            System.out.println(defaultValue + " ok?");
 
-            // TODO: register the new account here.
-            return true;
+            if(!defaultValue.equalsIgnoreCase("")){
+                System.out.println("def == empty" );
+                return true;
+                //return false;
+            }else if(password.equalsIgnoreCase(defaultValue)){
+                return true;
+            }
+
+            return false;
         }
 
         @Override
@@ -221,21 +200,24 @@ public class LoginActivity extends Activity{
             showProgress(false);
 
             if (success) {
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
-                //finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
 
             } else {
-  passwordView.setError(getString(R.string.error_incorrect_password));
-   passwordView.requestFocus();
+                passwordView.setError(getString(R.string.error_incorrect_password));
+                passwordView.requestFocus();
             }
         }
 
         @Override
         protected void onCancelled() {
             mAuthTask = null;
-      //      showProgress(false);
+            showProgress(false);
         }
+    }
+
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
 

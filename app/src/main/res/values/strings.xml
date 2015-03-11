@@ -10,17 +10,32 @@
 
 
 
-
-        <color name="primary">#ff075aab</color>
-        <color name="primary_dark">#ff162955</color>
-        <color name="primary_light">#BBDEFB</color>
-        <color name="accent">#ff537ad1</color>
+        <color name="primary">#F44336</color>
+        <color name="primary_dark">#D32F2F</color>
+        <color name="primary_light">#FFCDD2</color>
+        <color name="accent">#FF5252</color>
         <color name="primary_text">#212121</color>
         <color name="secondary_text">#727272</color>
         <color name="icons">#FFFFFF</color>
         <color name="divider">#B6B6B6</color>
 
+
+
+
+
+
+
+
    <string name="title_activity_view_image">viewImage</string>
     <string name="title_activity_chat">chat</string>
+    <string name="signout">Sign out</string>
+    <string name="confirmSignOut">Are you sure you want to sign out?</string>
+    <string name="yes">Yes</string>
+    <string name="signupbutton">Sign up</string>
+    <string name="action_delete">Delete image</string>
+    <string name="confirmDelete">Are you sure that you want to delete this conversation with</string>
+    <string name="deleteConversation">Delete conversation</string>
+    <string name="resetPassword">Restore password</string>
+    <string name="register">Registration</string>
 
 </resources>

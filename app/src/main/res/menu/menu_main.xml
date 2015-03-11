@@ -2,12 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
-    <!--<item android:id="@+id/action_settings"-->
-        <!--android:title="@string/action_settings"-->
-        <!--android:orderInCategory="100"-->
-        <!--app:showAsAction="always" />-->
-    <!--<item android:id="@+id/action_search"-->
-        <!--android:icon="@drawable/ic_action_delete"-->
-        <!--android:title="@string/action_search"-->
-        <!--app:showAsAction="ifRoom" />-->
-</menu>
+    <item android:id="@+id/action_settings"
+        android:title="@string/signout"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+    </menu>
